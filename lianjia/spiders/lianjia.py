@@ -23,8 +23,6 @@ class LianjiaSpider(scrapy.Spider):
         for url in response.xpath('//div[@class="info clear"]/div[@class="title"]/a/@href').extract():
             yield scrapy.Request(url, headers=headers, callback=self.parse_fangjia)
 
-        print ('+++')
-
     def parse_fangjia(self, response):
         item = LianjiaItem()
         item['title'] = self.ifNull(response.xpath('//h1[@class="main"]/text()').extract())
